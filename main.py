@@ -1,27 +1,29 @@
+from stats import get_num_words
 import sys
 
 
 def main():
-    args = sys.argv
+    #args = sys.argv
     
-    if len(args) < 2:
-        print("Usage: python3 main.py <path_to_book>")
-        sys.exit(1)
+    #if len(args) < 2:
+    #    print("Usage: python3 main.py <path_to_book>")
+    #    sys.exit(1)
 
-    book_path = args[1]
+    #book_path = args[1]
+    book_path = "books/frankenstein.txt"
     book_title = get_book_title(book_path)
 
     text = get_book_text(book_path)
     words = split_to_words(text)
 
-    num_of_words = len(words)
+    num_of_words = get_num_words(words)
 
     dict_of_character_count = count_characters_dict(text)
     list_of_character_count = create_character_list(dict_of_character_count)
 
     character_report = build_character_report(list_of_character_count)
 
-    print(f"The book {book_title} contains {num_of_words} words.")
+    print(f"{num_of_words} words found in the document.")
     print(character_report)
     
 
@@ -67,6 +69,8 @@ def create_character_list(character_count_dict):
 
     return character_list 
 
+def sort_by_char(dict):
+    return dict["letter"]
 
 
 def build_character_report(character_list):
@@ -82,12 +86,6 @@ def build_character_report(character_list):
     
     return character_report
 
-
-
-
-
-def sort_by_char(dict):
-    return dict["letter"]
 
 
 
